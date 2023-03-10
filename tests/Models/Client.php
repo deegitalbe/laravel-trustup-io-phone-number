@@ -12,7 +12,7 @@ class Client extends Model
 {
     use PhoneNumberTrait, HasFactory;
 
-    protected $fillable = ["phone"];
+    protected $fillable = ["phone", "phone_prefix"];
 
 
     protected static function newFactory()
