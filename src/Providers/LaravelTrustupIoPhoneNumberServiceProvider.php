@@ -1,14 +1,14 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate\Providers;
+namespace Deegital\LaravelTrustupIoPhoneNumber\Providers;
 
-use Henrotaym\VersioningPackageTemplate\VersioningPackageTemplate;
+use Deegital\LaravelTrustupIoPhoneNumber\LaravelTrustupIoPhoneNumber;
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
 
-class VersioningPackageTemplateServiceProvider extends VersionablePackageServiceProvider
+class LaravelTrustupIoPhoneNumberServiceProvider extends VersionablePackageServiceProvider
 {
     public static function getPackageClass(): string
     {
-        return VersioningPackageTemplate::class;
+        return LaravelTrustupIoPhoneNumber::class;
     }
 
     protected function addToRegister(): void

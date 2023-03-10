@@ -1,15 +1,15 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate\Tests;
+namespace Deegital\LaravelTrustupIoPhoneNumber\Tests;
 
-use Henrotaym\VersioningPackageTemplate\VersioningPackageTemplate;
+use Deegital\LaravelTrustupIoPhoneNumber\LaravelTrustupIoPhoneNumber;
 use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
-use Henrotaym\VersioningPackageTemplate\Providers\VersioningPackageTemplateServiceProvider;
+use Deegital\LaravelTrustupIoPhoneNumber\Providers\LaravelTrustupIoPhoneNumberServiceProvider;
 
 class TestCase extends VersionablePackageTestCase
 {
     public static function getPackageClass(): string
     {
-        return VersioningPackageTemplate::class;
+        return LaravelTrustupIoPhoneNumber::class;
     }
 
     public function getEnvironmentSetUp($app)
@@ -20,7 +20,7 @@ class TestCase extends VersionablePackageTestCase
     public function getServiceProviders(): array
     {
         return [
-            VersioningPackageTemplateServiceProvider::class
+            LaravelTrustupIoPhoneNumberServiceProvider::class
         ];
     }
 

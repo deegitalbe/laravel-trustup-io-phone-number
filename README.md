@@ -1,36 +1,30 @@
-# versioning-package-template
-## Configuration
-In `Installer.php` configure desired values
-```php
-class Installer
-{
-    protected string $namespace = "OrganizationName";
-    protected string $name = "PackageName";
-    protected string $description = "My package description";
-    protected string $authorName = "John Doe";
-    protected string $authorEmail = "john.doe@test.com";
-    protected string $repositoryUrl = "git@github.com:organization/package.git";
+# laravel-trustup-io-phone-number
 
-    // ...
-}
-```
+A trustup package to format phone number
 
 ## Installation
 
 ```shell
-./composer install && ./test && ./composer dump-autoload && ./test
+composer install deegital/laravel-trustup-io-phone-number
 ```
 
-## Available commands
+## Configure your model with trait
 
-```shell
-./composer [your_command_goes_here]
-```
+```php
+use Deegital\LaravelTrustupIoPhoneNumber\traits\PhoneNumberTrait;
 
-```shell
-./php [your_command_goes_here]
-```
+class MyModel extends Model
+{
+    use PhoneNumberTrait;
 
-```shell
-./test [your_command_goes_here]
+    public function getPhoneNumberValue(): string
+    {
+        return $this->phone;
+    }
+
+    public function getCountryValue(): CountryEnum
+    {
+        return CountryEnum::BELGIUM;
+    }
+}
 ```
