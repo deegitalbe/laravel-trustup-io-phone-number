@@ -1,9 +1,11 @@
 <?php
+
 namespace Deegital\LaravelTrustupIoPhoneNumber\Tests;
 
 use Deegital\LaravelTrustupIoPhoneNumber\LaravelTrustupIoPhoneNumber;
 use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
 use Deegital\LaravelTrustupIoPhoneNumber\Providers\LaravelTrustupIoPhoneNumberServiceProvider;
+use Deegital\LaravelTrustupIoPhoneNumber\Tests\Database\Migrations\CreateClientsTable;
 
 class TestCase extends VersionablePackageTestCase
 {
@@ -16,7 +18,7 @@ class TestCase extends VersionablePackageTestCase
     {
         $this->loadMigrations();
     }
-    
+
     public function getServiceProviders(): array
     {
         return [
@@ -26,7 +28,7 @@ class TestCase extends VersionablePackageTestCase
 
     protected function loadMigrations()
     {
-        foreach($this->getMigrations() as $migration):
+        foreach ($this->getMigrations() as $migration) :
             app()->make($migration)->up();
         endforeach;
     }

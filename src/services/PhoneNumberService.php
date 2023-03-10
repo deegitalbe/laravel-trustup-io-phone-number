@@ -4,12 +4,14 @@ namespace Deegital\LaravelTrustupIoPhoneNumber\services;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
 use Deegital\LaravelTrustupIoPhoneNumber\Enum\CountryEnum;
+use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 
 class PhoneNumberService implements PhoneNumberServiceContract
 {
     protected $phoneNumber;
+    protected $phoneNumberPrefix;
     protected $country;
 
     //GETTER
@@ -19,9 +21,14 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this->phoneNumber;
     }
 
-    public function getCountry(): CountryEnum
+    public function getCountry(): string
     {
         return $this->country;
+    }
+
+    public function getPhoneNumberPrefix(): string
+    {
+        return $this->phoneNumberPrefix;
     }
 
     public function getNexmoNumber(): ?string
@@ -57,9 +64,18 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this;
     }
 
-    public function setCountry(CountryEnum $country): self
+    public function setCountry(): self
     {
+        $country = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$this->phoneNumberPrefix][0];
+
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function setPhoneNumberPrefix(string $phoneNumberPrefix): self
+    {
+        $this->phoneNumberPrefix = $phoneNumberPrefix;
 
         return $this;
     }
@@ -75,7 +91,7 @@ class PhoneNumberService implements PhoneNumberServiceContract
 
     public function parse()
     {
-        return $this->getUtil()->parse($this->phoneNumber, $this->country->value);
+        return $this->getUtil()->parse($this->phoneNumberPrefix . $this->phoneNumber, $this->country);
     }
 
     public function formatNumber($format)

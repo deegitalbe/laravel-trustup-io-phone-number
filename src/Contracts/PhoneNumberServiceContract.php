@@ -10,7 +10,7 @@ interface PhoneNumberServiceContract
 
     public function getPhoneNumber(): string;
 
-    public function getCountry(): CountryEnum;
+    public function getCountry(): string;
 
     public function getNexmoNumber(): ?string;
 
