@@ -3,16 +3,15 @@
 namespace Deegital\LaravelTrustupIoPhoneNumber\services;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
-use Deegital\LaravelTrustupIoPhoneNumber\Enum\CountryEnum;
-use libphonenumber\CountryCodeToRegionCodeMap;
+use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 
 class PhoneNumberService implements PhoneNumberServiceContract
 {
-    protected $phoneNumber;
-    protected $phoneNumberPrefix;
-    protected $country;
+    protected string $phoneNumber;
+    protected string $phonePrefix;
+    protected string $locale;
 
     //GETTER
 
@@ -21,14 +20,15 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this->phoneNumber;
     }
 
-    public function getCountry(): string
+    public function getLocale(): string
     {
-        return $this->country;
+        return $this->locale;
     }
 
-    public function getPhoneNumberPrefix(): string
+
+    public function getPhonePrefix(): string
     {
-        return $this->phoneNumberPrefix;
+        return $this->phonePrefix;
     }
 
     public function getNexmoNumber(): ?string
@@ -53,6 +53,11 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this->formatNumber(PhoneNumberFormat::E164);
     }
 
+    public function isValidNumber(): bool
+    {
+        return true;
+    }
+
     //--------------------------------------------
 
     // SETTER
@@ -64,18 +69,16 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this;
     }
 
-    public function setCountry(): self
+    public function setLocale(string $locale): self
     {
-        $country = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$this->phoneNumberPrefix][0];
-
-        $this->country = $country;
+        $this->locale = $locale;
 
         return $this;
     }
 
-    public function setPhoneNumberPrefix(string $phoneNumberPrefix): self
+    public function setPhonePrefix(string $phonePrefix): self
     {
-        $this->phoneNumberPrefix = $phoneNumberPrefix;
+        $this->phonePrefix = $phonePrefix;
 
         return $this;
     }
@@ -84,23 +87,23 @@ class PhoneNumberService implements PhoneNumberServiceContract
 
     // LOGIC
 
-    public function getUtil()
+    public function getUtil(): PhoneNumberUtil
     {
         return PhoneNumberUtil::getInstance();
     }
 
-    public function parse()
+    public function parse(): PhoneNumber
     {
-        return $this->getUtil()->parse($this->phoneNumberPrefix . $this->phoneNumber, $this->country);
+        return $this->getUtil()->parse($this->phonePrefix . $this->phoneNumber, $this->locale);
     }
 
-    public function formatNumber($format)
+    public function formatNumber($format): ?string
     {
         try {
             return $this
                 ->getUtil()
                 ->format(
-                    $this->parse($this->phoneNumber, $this->country),
+                    $this->parse(),
                     $format
                 );
         } catch (\Exception $e) {

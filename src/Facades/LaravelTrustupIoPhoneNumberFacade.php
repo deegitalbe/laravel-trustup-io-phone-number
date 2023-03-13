@@ -12,9 +12,4 @@ class LaravelTrustupIoPhoneNumberFacade extends VersionablePackageFacade
     {
         return LaravelTrustupIoPhoneNumber::class;
     }
-
-    public static function getService()
-    {
-        return app(PhoneNumberService::class);
-    }
 }

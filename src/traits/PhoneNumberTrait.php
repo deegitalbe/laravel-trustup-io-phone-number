@@ -2,20 +2,21 @@
 
 namespace Deegital\LaravelTrustupIoPhoneNumber\traits;
 
+use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
 use Deegital\LaravelTrustupIoPhoneNumber\Enum\CountryEnum;
 use Deegital\LaravelTrustupIoPhoneNumber\Facades\LaravelTrustupIoPhoneNumberFacade;
 use Deegital\LaravelTrustupIoPhoneNumber\services\PhoneNumberService;
 
 trait PhoneNumberTrait
 {
-    public function PhoneNumberService(): PhoneNumberService
+    public function phoneNumberService(): PhoneNumberServiceContract
     {
-        /** @var PhoneNumberService */
+        /** @var PhoneNumberServiceContract */
         $service = LaravelTrustupIoPhoneNumberFacade::getService();
 
-        $service->setPhoneNumber($this->getPhoneNumberValue());
-        $service->setPhoneNumberPrefix($this->getPhoneNumberPrefixValue());
-        $service->setCountry();
+        $service->setPhoneNumber($this->getPhoneNumberValue())
+            ->setPhonePrefix($this->getPhoneNumberPrefixValue())
+            ->setLocale(app()->getLocale());
 
         return $service;
     }
@@ -25,28 +26,28 @@ trait PhoneNumberTrait
         return $this->phone;
     }
 
-    public function getPhoneNumberPrefixValue(): string
+    public function getPhonePrefixValue(): string
     {
         return $this->phone_prefix;
     }
 
     public function getNexmoNumber(): ?string
     {
-        return $this->PhoneNumberService()->getNexmoNumber();
+        return $this->phoneNumberService()->getNexmoNumber();
     }
 
     public function getNationalNumber(): ?string
     {
-        return $this->PhoneNumberService()->getNationalNumber();
+        return $this->phoneNumberService()->getNationalNumber();
     }
 
     public function getInternationalNumber(): ?string
     {
-        return $this->PhoneNumberService()->getInternationalNumber();
+        return $this->phoneNumberService()->getInternationalNumber();
     }
 
     public function getE164Number(): ?string
     {
-        return $this->PhoneNumberService()->getE164Number();
+        return $this->phoneNumberService()->getE164Number();
     }
 }
