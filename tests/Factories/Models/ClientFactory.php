@@ -17,7 +17,7 @@ class ClientFactory extends EloquentFactory
 
         return [
             "phone" => "281.909.5412 x779",
-            "phone_prefix" => "32"
+            "phone_prefix" => "+32"
         ];
     }
 }

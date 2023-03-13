@@ -6,6 +6,7 @@ use Deegital\LaravelTrustupIoPhoneNumber\Tests\TestCase;
 use Deegital\LaravelTrustupIoPhoneNumber\Facades\LaravelTrustupIoPhoneNumberFacade;
 use Deegital\LaravelTrustupIoPhoneNumber\Services\PhoneNumberService;
 use libphonenumber\PhoneNumber;
+use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 
 class ExampleUnitTest extends TestCase
@@ -25,7 +26,7 @@ class ExampleUnitTest extends TestCase
         $phoneNumberMock = $this->mockThis(PhoneNumber::class);
 
 
-        $this->setPrivateProperty('phonePrefix', '32', $classMock);
+        $this->setPrivateProperty('phonePrefix', '+32', $classMock);
         $this->setPrivateProperty('phoneNumber', '281.909.5412 x779', $classMock);
         $this->setPrivateProperty('locale', 'BE', $classMock);
 
@@ -35,5 +36,25 @@ class ExampleUnitTest extends TestCase
 
 
         $this->assertInstanceOf(PhoneNumber::class, $classMock->parse());
+    }
+
+    public function test_it_can_format()
+    {
+        $classMock = $this->mockThis(PhoneNumberService::class);
+        $phoneNumberUtilMock = $this->mockThis(PhoneNumberUtil::class);
+        $phoneNumberMock = $this->mockThis(PhoneNumber::class);
+        $phoneNumberFormatMock = $this->mockThis(PhoneNumberFormat::class);
+
+        $this->setPrivateProperty('phonePrefix', '+32', $classMock);
+        $this->setPrivateProperty('phoneNumber', '281.909.5412 x779', $classMock);
+        $this->setPrivateProperty('locale', 'BE', $classMock);
+
+        $classMock->shouldReceive('getUtil')->once()->andReturn($phoneNumberUtilMock);
+        $classMock->shouldReceive('parse')->once()->andReturn($phoneNumberMock);
+        $phoneNumberUtilMock->shouldReceive('format')->once()->with($phoneNumberMock, $phoneNumberFormatMock)->andReturn("+322819095412");
+
+        $classMock->shouldReceive('formatNumber')->once()->with($phoneNumberFormatMock)->passthru();
+
+        $this->assertEquals("+322819095412", $classMock->formatNumber($phoneNumberFormatMock));
     }
 }
