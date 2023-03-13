@@ -1,11 +1,10 @@
 <?php
 
-namespace Deegital\LaravelTrustupIoPhoneNumber\traits;
+namespace Deegital\LaravelTrustupIoPhoneNumber\Traits;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
-use Deegital\LaravelTrustupIoPhoneNumber\Enum\CountryEnum;
 use Deegital\LaravelTrustupIoPhoneNumber\Facades\LaravelTrustupIoPhoneNumberFacade;
-use Deegital\LaravelTrustupIoPhoneNumber\services\PhoneNumberService;
+
 
 trait PhoneNumberTrait
 {
@@ -15,9 +14,9 @@ trait PhoneNumberTrait
         $service = LaravelTrustupIoPhoneNumberFacade::getService();
 
         $service->setPhoneNumber($this->getPhoneNumberValue())
-            ->setPhonePrefix($this->getPhoneNumberPrefixValue())
+            ->setPhonePrefix($this->getPhonePrefixValue())
             ->setLocale(app()->getLocale());
-
+        //TODO getLocale format is not compatible
         return $service;
     }
 

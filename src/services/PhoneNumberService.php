@@ -1,6 +1,6 @@
 <?php
 
-namespace Deegital\LaravelTrustupIoPhoneNumber\services;
+namespace Deegital\LaravelTrustupIoPhoneNumber\Services;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
 use libphonenumber\PhoneNumber;

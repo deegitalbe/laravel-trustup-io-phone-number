@@ -4,7 +4,7 @@ namespace Deegital\LaravelTrustupIoPhoneNumber\Tests\Models;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Enum\CountryEnum;
 use Deegital\LaravelTrustupIoPhoneNumber\Tests\Factories\Models\ClientFactory;
-use Deegital\LaravelTrustupIoPhoneNumber\traits\PhoneNumberTrait;
+use Deegital\LaravelTrustupIoPhoneNumber\Traits\PhoneNumberTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
