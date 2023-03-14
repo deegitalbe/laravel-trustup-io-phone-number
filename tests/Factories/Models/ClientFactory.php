@@ -16,7 +16,7 @@ class ClientFactory extends EloquentFactory
         $faker = FakerFactory::create();
 
         return [
-            "phone" => "281.909.5412 x779",
+            "phone" => $this->faker->phoneNumber(),
             "phone_prefix" => "+32"
         ];
     }

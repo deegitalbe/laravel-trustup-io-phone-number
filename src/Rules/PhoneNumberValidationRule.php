@@ -10,9 +10,8 @@ class PhoneNumberValidationRule implements Rule
     public function passes($attribute, $phoneNumber)
     {
         $phoneNumberService = LaravelTrustupIoPhoneNumberFacade::getService();
-        $phoneNumberService->setPhoneNumber($phoneNumber['phone']);
-        $phoneNumberService->setPhonePrefix($phoneNumber['prefix']);
-        $phoneNumberService->setLocale(app()->getLocale());
+        $phoneNumberService->setPhoneNumber($phoneNumber['phone'])
+            ->setPhonePrefix($phoneNumber['prefix']);
 
         try {
             $phoneNumberService->parse();

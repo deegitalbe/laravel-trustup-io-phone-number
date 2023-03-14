@@ -9,24 +9,18 @@ use libphonenumber\PhoneNumberUtil;
 
 class PhoneNumberService implements PhoneNumberServiceContract
 {
-    protected string $phoneNumber;
-    protected string $phonePrefix;
+    protected ?string $phoneNumber;
+    protected ?string $phonePrefix;
     protected string $locale;
 
     //GETTER
 
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
-    public function getLocale(): string
-    {
-        return $this->locale;
-    }
-
-
-    public function getPhonePrefix(): string
+    public function getPhonePrefix(): ?string
     {
         return $this->phonePrefix;
     }
@@ -53,30 +47,19 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this->formatNumber(PhoneNumberFormat::E164);
     }
 
-    public function isValidNumber(): bool
-    {
-        return true;
-    }
 
     //--------------------------------------------
 
     // SETTER
 
-    public function setPhoneNumber(string $phoneNumber): self
+    public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
-    public function setLocale(string $locale): self
-    {
-        $this->locale = $locale;
-
-        return $this;
-    }
-
-    public function setPhonePrefix(string $phonePrefix): self
+    public function setPhonePrefix(?string $phonePrefix): self
     {
         $this->phonePrefix = $phonePrefix;
 
@@ -94,20 +77,37 @@ class PhoneNumberService implements PhoneNumberServiceContract
 
     public function parse(): PhoneNumber
     {
-        return $this->getUtil()->parse($this->phonePrefix . $this->phoneNumber, $this->locale);
+        return $this->getUtil()->parse($this->getFormatedNumber());
     }
 
     public function formatNumber($format): ?string
     {
-        try {
-            return $this
-                ->getUtil()
-                ->format(
-                    $this->parse(),
-                    $format
-                );
-        } catch (\Exception $e) {
-            return null;
+        if ($this->hasPhoneNumber()) {
+            try {
+                return $this
+                    ->getUtil()
+                    ->format(
+                        $this->parse(),
+                        $format
+                    );
+            } catch (\Exception $e) {
+                return null;
+            }
         }
+
+        return null;
+    }
+
+    protected function getFormatedNumber(): string
+    {
+        // TODO use lib to get +32 from BE
+        return ($this->phonePrefix ?: "+32") . $this->phoneNumber;
+    }
+
+    protected function hasPhoneNumber(): bool
+    {
+        if ($this->phoneNumber) return true;
+
+        return false;
     }
 }

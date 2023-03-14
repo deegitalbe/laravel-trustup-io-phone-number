@@ -14,9 +14,8 @@ trait PhoneNumberTrait
         $service = LaravelTrustupIoPhoneNumberFacade::getService();
 
         $service->setPhoneNumber($this->getPhoneNumberValue())
-            ->setPhonePrefix($this->getPhonePrefixValue())
-            ->setLocale(app()->getLocale());
-        //TODO getLocale format is not compatible
+            ->setPhonePrefix($this->getPhonePrefixValue());
+
         return $service;
     }
 
@@ -25,7 +24,7 @@ trait PhoneNumberTrait
         return $this->phone;
     }
 
-    public function getPhonePrefixValue(): string
+    public function getPhonePrefixValue(): ?string
     {
         return $this->phone_prefix;
     }
