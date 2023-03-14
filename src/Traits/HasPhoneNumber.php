@@ -6,7 +6,7 @@ use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
 use Deegital\LaravelTrustupIoPhoneNumber\Facades\LaravelTrustupIoPhoneNumberFacade;
 
 
-trait PhoneNumberTrait
+trait HasPhoneNumber
 {
     public function phoneNumberService(): PhoneNumberServiceContract
     {
