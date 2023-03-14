@@ -17,14 +17,5 @@ class MyModel extends Model
 {
     use PhoneNumberTrait;
 
-    public function getPhoneNumberValue(): string
-    {
-        return $this->phone;
-    }
-
-    public function getCountryValue(): CountryEnum
-    {
-        return CountryEnum::BELGIUM;
-    }
 }
 ```
