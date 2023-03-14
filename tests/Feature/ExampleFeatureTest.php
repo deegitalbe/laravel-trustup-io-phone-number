@@ -3,6 +3,7 @@
 namespace Deegital\LaravelTrustupIoPhoneNumber\Tests\Feature;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Tests\Models\Client;
+use Deegital\LaravelTrustupIoPhoneNumber\Tests\Models\ClientCustom;
 use Deegital\LaravelTrustupIoPhoneNumber\Tests\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -81,5 +82,15 @@ class ExampleFeatureTest extends TestCase
 
 
         $this->assertEquals(null, $client->getE164Number());
+    }
+
+    public function test_custom_trait()
+    {
+        /** @var ClientCustom */
+        $clientCustom = ClientCustom::factory()->make([
+            'tel' => '475898602',
+        ]);
+
+        $this->assertEquals('475898602', $clientCustom->getPhoneNumberValue());
     }
 }

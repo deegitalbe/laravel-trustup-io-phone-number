@@ -20,14 +20,4 @@ class Client extends Model implements HasPhoneNumberContract
     {
         return ClientFactory::new();
     }
-
-    // public function getPhoneNumberValue(): string
-    // {
-    //     return $this->phone;
-    // }
-
-    // public function getCountryValue(): CountryEnum
-    // {
-    //     return CountryEnum::BELGIUM;
-    // }
 }
