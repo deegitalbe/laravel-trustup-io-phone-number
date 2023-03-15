@@ -93,4 +93,14 @@ class ExampleFeatureTest extends TestCase
 
         $this->assertEquals('475898602', $clientCustom->getPhoneNumberValue());
     }
+
+    public function test_it_get_number_type()
+    {
+        /** @var Client */
+        $client = Client::factory()->make([
+            'phone' => '475898602'
+        ]);
+
+        $this->assertEquals(true, $client->hasMobilePhoneNumber());
+    }
 }

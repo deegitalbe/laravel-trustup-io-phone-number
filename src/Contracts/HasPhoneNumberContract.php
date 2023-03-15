@@ -16,4 +16,8 @@ interface HasPhoneNumberContract
     public function getInternationalNumber(): ?string;
 
     public function getE164Number(): ?string;
+
+    public function getNumberType(): ?int;
+
+    public function hasMobilePhoneNumber(): bool;
 }

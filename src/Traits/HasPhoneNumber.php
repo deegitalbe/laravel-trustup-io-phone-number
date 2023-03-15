@@ -48,4 +48,14 @@ trait HasPhoneNumber
     {
         return $this->phoneNumberService()->getE164Number();
     }
+
+    public function getNumberType(): ?int
+    {
+        return $this->phoneNumberService()->getNumberType();
+    }
+
+    public function hasMobilePhoneNumber(): bool
+    {
+        return $this->phoneNumberService()->hasMobilePhoneNumber();
+    }
 }

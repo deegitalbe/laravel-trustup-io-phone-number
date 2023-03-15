@@ -4,6 +4,7 @@ namespace Deegital\LaravelTrustupIoPhoneNumber\Contracts;
 
 use Deegital\LaravelTrustupIoPhoneNumber\Enum\CountryEnum;
 use Deegital\LaravelTrustupIoPhoneNumber\Enum\LocaleEnum;
+use libphonenumber\PhoneNumberType;
 
 interface PhoneNumberServiceContract
 
@@ -23,4 +24,8 @@ interface PhoneNumberServiceContract
     public function getInternationalNumber(): ?string;
 
     public function getE164Number(): ?string;
+
+    public function getNumberType(): ?int;
+
+    public function hasMobilePhoneNumber(): bool;
 }

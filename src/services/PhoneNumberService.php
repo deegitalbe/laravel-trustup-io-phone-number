@@ -5,6 +5,7 @@ namespace Deegital\LaravelTrustupIoPhoneNumber\Services;
 use Deegital\LaravelTrustupIoPhoneNumber\Contracts\PhoneNumberServiceContract;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 
 class PhoneNumberService implements PhoneNumberServiceContract
@@ -47,6 +48,15 @@ class PhoneNumberService implements PhoneNumberServiceContract
         return $this->formatNumber(PhoneNumberFormat::E164);
     }
 
+    public function getNumberType(): ?int
+    {
+        return $this->getUtil()->getNumberType($this->parse());
+    }
+
+    public function hasMobilePhoneNumber(): bool
+    {
+        return $this->getNumberType() === PhoneNumberType::MOBILE;
+    }
 
     //--------------------------------------------
 
