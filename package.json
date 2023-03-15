@@ -1,6 +1,6 @@
 {
     "name": "laravel-trustup-io-phone-number",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "main": "index.js",
     "repository": "git@github.com:deegitalbe/laravel-trustup-io-phone-number.git",
     "author": "Axel Marquet <axel.marquet@trustup.be>",
